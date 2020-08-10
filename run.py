@@ -15,7 +15,7 @@ this so that it knows where to look for templates and static files.
 """
 app = Flask(__name__)
 
-# Use route decorator to tell Flask what url should trigger the function that follows
+
 @app.route("/")
 def index():
     return render_template("index.html")
