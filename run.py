@@ -1,4 +1,5 @@
 import os
+import json
 
 # Import the flask class
 from flask import Flask, render_template
@@ -23,7 +24,13 @@ def index():
 
 @app.route("/about")
 def about():
-    return render_template("about.html", page_title="About")
+    # initialise epty list data variable
+    data = []
+    # open the .json file as read only, and assigning contents to json_data
+    with open("data/company.json", "r") as json_data:
+        # the data list will be equal to the json data
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", company=data)
 
 
 @app.route("/contact")
