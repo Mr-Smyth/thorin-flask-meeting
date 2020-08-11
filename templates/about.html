@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-{{ company[1]["name"] }}
-
 <h2>{{ page_title }}</h2>
 <p>
 	The formation of the group grew out of a meeting Gandalf had with Thorin in Bree which kindled Thorin's interest in
@@ -17,17 +15,37 @@
 {% for member in company %}
 
     <div class="row featurette">
-        <div class="col-md-7">
-            <h3>{{ member.name }}</h3>
-            <p>{{ member.description }}</p>
-        </div>
-        <div class="col-md-5">
-            <img src="{{ member.image_source }}" alt="{{ member.name }} image" class="featurette-image image-responsive">
-        </div>
-        </div>
+        {% if loop.index % 2 !=0 %}
+            <div class="col-md-7">
+                <!-- loop.index provides the index number for the loop -->
+                <h3>{{ loop.index }} {{ member.name }}</h3>
+                <p>{{ member.description }}</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{{ member.image_source }}" alt="{{ member.name }} image" class="featurette-image image-responsive">
+            </div>
 
+        {% else %}
+
+            <div class="col-md-5">
+                <img src="{{ member.image_source }}" alt="{{ member.name }} image" class="featurette-image image-responsive">
+            </div>
+            <div class="col-md-7">
+                <!-- loop.index provides the index number for the loop -->
+                <h3>{{ loop.index }} {{ member.name }}</h3>
+                <p>{{ member.description }}</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    {% if loop.index != loop.length %}
+        
         <hr class="featurette-divider">
 
-	{% endfor %}
+    {% endif %}
 
-	{% endblock %}
+{% endfor %}
+
+{% endblock %}
