@@ -2,7 +2,7 @@ import os
 import json
 
 # Import the flask class
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # Create an instance of this class
 # Convention is that the variable be called app
