@@ -49,6 +49,8 @@ def about_member(member_name):
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        print(request.form)
     return render_template("contact.html", page_title="Contact")
 
 
