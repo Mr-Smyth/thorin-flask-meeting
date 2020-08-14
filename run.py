@@ -2,7 +2,12 @@ import os
 import json
 
 # Import the flask class
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
+
+
+if os.path.exists("env.py"):
+    import env
+
 
 # Create an instance of this class
 # Convention is that the variable be called app
@@ -15,6 +20,7 @@ which is a built-in Python variable. Flask needs
 this so that it knows where to look for templates and static files.
 """
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 @app.route("/")
@@ -50,7 +56,8 @@ def about_member(member_name):
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        print(request.form["email"])
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
